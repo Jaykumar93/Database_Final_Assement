@@ -1,0 +1,162 @@
+
+
+mysql> insert into test_teacher values
+    -> (11,"sam","pune","bio",6,120000),
+    -> (12,"john","Sangli","math",3,210000),
+    -> (13,"ram","Mumbai","chemistry",7,320000),
+    -> (14,"sham","Ahmedabad","bio",4, 210000),
+    -> (15,"radha","kolhapur","electronics",3,42000),
+    -> (16,"bina","sangli","english",8,400000),
+    -> (17,"joyti","mumbai","math",2,34000),
+    -> (18,"deep","kolhapur","chemistry",1,2000);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from test_teacher;
++------------+--------------+--------------+------------------------+-------------+--------+
+| teacher_id | teacher_name | teacher_city | teacher_subject_expert | year_of_exp | salary |
++------------+--------------+--------------+------------------------+-------------+--------+
+|         11 | sam          | pune         | bio                    |           6 | 120000 |
+|         12 | john         | Sangli       | math                   |           3 | 210000 |
+|         13 | ram          | Mumbai       | chemistry              |           7 | 320000 |
+|         14 | sham         | Ahmedabad    | bio                    |           4 | 210000 |
+|         15 | radha        | kolhapur     | electronics            |           3 |  42000 |
+|         16 | bina         | sangli       | english                |           8 | 400000 |
+|         17 | joyti        | mumbai       | math                   |           2 |  34000 |
+|         18 | deep         | kolhapur     | chemistry              |           1 |   2000 |
++------------+--------------+--------------+------------------------+-------------+--------+
+8 rows in set (0.00 sec)
+
+
+mysql> create table test_student(
+    -> s_id int primary key,
+    -> s_name varchar(30),
+    -> s_age int,
+    -> s_course varchar(30),
+    -> s_city varchar(30),
+    -> s_year int,
+    -> s_percentage int,
+    -> teacher_id int,
+    -> foreign key(teacher_id) references test_teacher(teacher_id));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into test_student values
+    -> (1,"jay",21,"bio","pune",3,80,11),
+    -> (2,"kedar",11,"math","Sangli",4,70,12),
+    -> (3,"athira",32,"chemistry","mumbai",2,75,13),
+    -> (4,"sri",22,"bio","Ahmedabad",1,81,14),
+    -> (5,"amey",20,"electronics","kolhapur",1,43,15),
+    -> (6,"ashish",21,"english","sangli",3,66,16),
+    -> (7,"avinash",33,"math","mumbai",2,77,17),
+    -> (8,"ankita",45,"chemistry","kolhapur",3,68,18);
+Query OK, 8 rows affected (0.04 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from test_teacher;
++------------+--------------+--------------+------------------------+-------------+--------+
+| teacher_id | teacher_name | teacher_city | teacher_subject_expert | year_of_exp | salary |
++------------+--------------+--------------+------------------------+-------------+--------+
+|         11 | sam          | pune         | bio                    |           6 | 120000 |
+|         12 | john         | Sangli       | math                   |           3 | 210000 |
+|         13 | ram          | Mumbai       | chemistry              |           7 | 320000 |
+|         14 | sham         | Ahmedabad    | bio                    |           4 | 210000 |
+|         15 | radha        | kolhapur     | electronics            |           3 |  42000 |
+|         16 | bina         | sangli       | english                |           8 | 400000 |
+|         17 | joyti        | mumbai       | math                   |           2 |  34000 |
+|         18 | deep         | kolhapur     | chemistry              |           1 |   2000 |
++------------+--------------+--------------+------------------------+-------------+--------+
+8 rows in set (0.00 sec)
+
+
+3)
+mysql> alter table test_student
+    -> rename column s_course to s_subject;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+4)
+
+
+5)
+mysql> select * from test_student
+    -> where s_city = "pune" OR s_city = "mumbai";
++------+---------+-------+-----------+--------+--------+--------------+------------+
+| s_id | s_name  | s_age | s_course  | s_city | s_year | s_percentage | teacher_id |
++------+---------+-------+-----------+--------+--------+--------------+------------+
+|    1 | jay     |    21 | bio       | pune   |      3 |           80 |         11 |
+|    3 | athira  |    32 | chemistry | mumbai |      2 |           75 |         13 |
+|    7 | avinash |    33 | math      | mumbai |      2 |           77 |         17 |
++------+---------+-------+-----------+--------+--------+--------------+------------+
+3 rows in set (0.00 sec)
+
+
+6)
+mysql> select * from test_teacher
+    -> where teacher_name LIKE 'a%' and teacher_city="ahmedabad";
++------------+--------------+--------------+------------------------+-------------+--------+
+| teacher_id | teacher_name | teacher_city | teacher_subject_expert | year_of_exp | salary |
++------------+--------------+--------------+------------------------+-------------+--------+
+|         19 | asha         | ahmedabad    | math                   |           2 |  34000 |
++------------+--------------+--------------+------------------------+-------------+--------+
+1 row in set (0.01 sec)
+
+7)
+mysql> select * from test_teacher
+    -> where year_of_exp >=4;
++------------+--------------+--------------+------------------------+-------------+--------+
+| teacher_id | teacher_name | teacher_city | teacher_subject_expert | year_of_exp | salary |
++------------+--------------+--------------+------------------------+-------------+--------+
+|         11 | sam          | pune         | bio                    |           6 | 120000 |
+|         13 | ram          | Mumbai       | chemistry              |           7 | 320000 |
+|         14 | sham         | Ahmedabad    | bio                    |           4 | 210000 |
+|         16 | bina         | sangli       | english                |           8 | 400000 |
++------------+--------------+--------------+------------------------+-------------+--------+
+4 rows in set (0.00 sec)
+
+
+8)
+mysql> UPDATE test_teacher
+    -> where teacher name LIKE 'a%' and teacher_city="ahmedab^Z^C
+mysql> UPDATE test_teacher
+    -> SET salary = salary + 1000;
+Query OK, 9 rows affected (0.01 sec)
+Rows matched: 9  Changed: 9  Warnings: 0
+
+mysql>
+
+
+
+9)
+mysql> select count(*)
+    -> , s_city
+    -> from test_student
+    -> group by s_city;
++----------+-----------+
+| count(*) | s_city    |
++----------+-----------+
+|        1 | pune      |
+|        2 | Sangli    |
+|        2 | mumbai    |
+|        1 | Ahmedabad |
+|        2 | kolhapur  |
++----------+-----------+
+5 rows in set (0.00 sec)
+
+10)
+
+
+mysql> select test_student.*, test_teacher.*
+    -> from test_student
+    -> join test_teacher ON test_student.teacher_id = test_teacher.teacher_id
+    -> where test_student.s_percentage >=70
+    -> and test_teacher.year_of_exp >=3;
++------+--------+-------+-----------+-----------+--------+--------------+------------+------------+--------------+--------------+------------------------+-------------+--------+
+| s_id | s_name | s_age | s_course  | s_city    | s_year | s_percentage | teacher_id | teacher_id | teacher_name | teacher_city | teacher_subject_expert | year_of_exp | salary |
++------+--------+-------+-----------+-----------+--------+--------------+------------+------------+--------------+--------------+------------------------+-------------+--------+
+|    1 | jay    |    21 | bio       | pune      |      3 |           80 |         11 |         11 | sam          | pune         | bio                    |           6 | 120000 |
+|    2 | kedar  |    11 | math      | Sangli    |      4 |           70 |         12 |         12 | john         | Sangli       | math                   |           3 | 210000 |
+|    3 | athira |    32 | chemistry | mumbai    |      2 |           75 |         13 |         13 | ram          | Mumbai       | chemistry              |           7 | 320000 |
+|    4 | sri    |    22 | bio       | Ahmedabad |      1 |           81 |         14 |         14 | sham         | Ahmedabad    | bio                    |           4 | 210000 |
++------+--------+-------+-----------+-----------+--------+--------------+------------+------------+--------------+--------------+------------------------+-------------+--------+
+4 rows in set (0.00 sec)
